@@ -39,7 +39,6 @@ export default function Hero() {
         />
       </div>
 
-      {/* ================= DESKTOP / TABLET (UNCHANGED LOOK) ================= */}
       {/* ================= DESKTOP / TABLET (SAME LAYOUT, CENTERED) ================= */}
       <div className="hidden lg:block relative flex-1">
         {/* Laptop + orbit */}
@@ -201,7 +200,7 @@ export default function Hero() {
           </div>
 
           <div className="pointer-events-none flex justify-center mb-6">
-            <div className="origin-center scale-[0.72] min-[380px]:scale-[0.88] min-[420px]:scale-[0.54] sm:scale-[0.68]">
+            <div className="origin-center scale-[0.72] min-[380px]:scale-[0.88] min-[520px]:scale-[0.54] sm:scale-[0.68]">
               <LaptopOrbit />
             </div>
           </div>
