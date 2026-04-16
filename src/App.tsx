@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { Outlet, Route, Routes } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -10,10 +12,13 @@ import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+
+import AllProjects from './pages/AllProjects.tsx';
+
 import { useScrollAnimation } from './hooks/useScrollAnimation';
 import { useCursor } from './hooks/useCursor';
 
-function App() {
+function Layout() {
   useScrollAnimation();
   useCursor();
 
@@ -25,20 +30,42 @@ function App() {
     <>
       <div className="cursor" />
       <div className="cursor-follower" />
+
       <Navbar />
+
       <main>
-        <Hero />
-        <Services />
-        <Stats />
-        <Projects />
-        <Process />
-        <About />
-        <Testimonials />
-        <CTA />
-        <Contact />
+        <Outlet />
       </main>
+
       <Footer />
     </>
+  );
+}
+
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Services />
+      <Stats />
+      <Projects />
+      <Process />
+      <About />
+      <Testimonials />
+      <CTA />
+      <Contact />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/all-projects" element={<AllProjects />} />
+      </Route>
+    </Routes>
   );
 }
 

@@ -19,7 +19,7 @@ export default function Navbar() {
         }`}
     >
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16 flex items-center justify-between h-20">
-        <a href="#" className="relative flex items-center h-full w-[180px] overflow-visible cursor-none">
+        <a href="/" className="relative flex items-center h-full w-[180px] overflow-visible cursor-none">
           <img
             src='./yuvaQ-01.png'
             alt="Logo"

@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const projects = [
   {
@@ -57,6 +58,7 @@ type RevealState = {
 };
 
 export default function Projects() {
+  const navigate = useNavigate();
   const timerRef = useRef<number | null>(null);
 
   const [reveal, setReveal] = useState<RevealState>({
@@ -67,6 +69,14 @@ export default function Projects() {
   });
 
   const [isNavigating, setIsNavigating] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        window.clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   const handleViewAllWork = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isNavigating) return;
@@ -94,7 +104,7 @@ export default function Projects() {
     });
 
     timerRef.current = window.setTimeout(() => {
-      window.location.href = '/all-projects';
+      navigate('/all-projects');
     }, 900);
   };
 

@@ -58,7 +58,7 @@ export default function Footer() {
               experiences that help brands grow faster and look stronger online.
             </p>
 
-            <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row">
+            {/* <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row">
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -71,7 +71,7 @@ export default function Footer() {
               >
                 <ArrowRight size={18} />
               </button>
-            </div>
+            </div> */}
 
             <div className="mt-8 flex gap-3">
               {socialLinks.map(({ icon: Icon, href }, i) => (
