@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -10,27 +10,25 @@ export default function Navbar() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const scrollYRef = useRef(0);
+
+  const closeMenu = () => setOpen(false);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-
-      // if user somehow starts scrolling, close mobile menu
-      if (open) {
-        setOpen(false);
-      }
     };
 
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => window.removeEventListener('scroll', onScroll);
-  }, [open]);
+  }, []);
 
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 1024) {
-        setOpen(false);
+        closeMenu();
       }
     };
 
@@ -39,29 +37,49 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // lock body scroll when mobile menu is open
-    const previousOverflow = document.body.style.overflow;
-    const previousTouchAction = document.body.style.touchAction;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
+    };
 
-    if (open) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-    } else {
-      document.body.style.overflow = previousOverflow || '';
-      document.body.style.touchAction = previousTouchAction || '';
-    }
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+
+    scrollYRef.current = window.scrollY;
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollYRef.current}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    body.style.overflow = 'hidden';
+
+    html.style.overflow = 'hidden';
 
     return () => {
-      document.body.style.overflow = previousOverflow || '';
-      document.body.style.touchAction = previousTouchAction || '';
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      body.style.overflow = '';
+      html.style.overflow = '';
+
+      window.scrollTo(0, scrollYRef.current);
     };
   }, [open]);
 
   useEffect(() => {
-    // close menu on route/hash change
-    setOpen(false);
+    closeMenu();
 
-    // handle scrolling to section after navigation like /#contact
     if (location.pathname === '/' && location.hash) {
       const id = location.hash.replace('#', '');
       const el = document.getElementById(id);
@@ -81,7 +99,7 @@ export default function Navbar() {
   }, [location.pathname, location.hash]);
 
   const handleHomeClick = () => {
-    setOpen(false);
+    closeMenu();
 
     if (location.pathname !== '/') {
       navigate('/');
@@ -95,7 +113,7 @@ export default function Navbar() {
   };
 
   const handleSectionClick = (section: string) => {
-    setOpen(false);
+    closeMenu();
 
     if (location.pathname !== '/') {
       navigate(`/#${section}`);
@@ -120,22 +138,22 @@ export default function Navbar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          scrolled || open
             ? 'bg-[#EDECE8]/95 backdrop-blur-sm border-b border-[#D4D3CF]'
             : ''
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-8 lg:px-16 flex items-center justify-between h-20">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 flex items-center justify-between h-20">
           <button
             type="button"
             onClick={handleHomeClick}
-            className="relative flex items-center h-full w-[180px] overflow-visible cursor-none"
+            className="relative flex items-center h-full w-[170px] sm:w-[180px] overflow-visible cursor-none"
             aria-label="Go to home"
           >
             <img
               src="/yuvaQ-01.png"
               alt="Logo"
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-32 w-auto max-w-none object-contain"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-28 sm:h-32 w-auto max-w-none object-contain"
             />
           </button>
 
@@ -173,6 +191,7 @@ export default function Navbar() {
             onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -180,33 +199,45 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="lg:hidden fixed top-20 left-0 right-0 bottom-0 z-40 bg-[#EDECE8] border-t border-[#D4D3CF] px-8 py-8 overflow-y-auto">
-          <div className="flex flex-col gap-6">
-            {links.map((link) => {
-              const section = link.toLowerCase();
+        <>
+          <button
+            type="button"
+            aria-label="Close mobile menu"
+            className="lg:hidden fixed inset-0 top-20 z-40 bg-black/20 backdrop-blur-[1px]"
+            onClick={closeMenu}
+          />
 
-              return (
-                <button
-                  key={link}
-                  type="button"
-                  onClick={() => handleSectionClick(section)}
-                  className="text-left text-2xl font-bold tracking-tight cursor-none"
-                  style={{ fontFamily: 'Syne, sans-serif' }}
-                >
-                  {link}
-                </button>
-              );
-            })}
+          <div
+            id="mobile-menu"
+            className="lg:hidden fixed top-20 left-0 right-0 bottom-0 z-50 bg-[#EDECE8] border-t border-[#D4D3CF] px-6 sm:px-8 py-8 overflow-y-auto overscroll-contain"
+          >
+            <div className="flex flex-col gap-6">
+              {links.map((link) => {
+                const section = link.toLowerCase();
 
-            <button
-              type="button"
-              onClick={() => handleSectionClick('contact')}
-              className="btn-dark w-fit mt-4 cursor-none"
-            >
-              <span>Start a Project</span>
-            </button>
+                return (
+                  <button
+                    key={link}
+                    type="button"
+                    onClick={() => handleSectionClick(section)}
+                    className="text-left text-2xl font-bold tracking-tight cursor-none"
+                    style={{ fontFamily: 'Syne, sans-serif' }}
+                  >
+                    {link}
+                  </button>
+                );
+              })}
+
+              <button
+                type="button"
+                onClick={() => handleSectionClick('contact')}
+                className="btn-dark w-fit mt-4 cursor-none"
+              >
+                <span>Start a Project</span>
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
