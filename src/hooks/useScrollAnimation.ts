@@ -1,23 +1,40 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export function useScrollAnimation() {
+  const location = useLocation();
+
   useEffect(() => {
-    const elements = document.querySelectorAll(
-      '.animate-on-scroll, .animate-slide-left, .animate-scale'
-    );
+    let observer: IntersectionObserver | null = null;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animated');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-    );
+    const frameId = window.requestAnimationFrame(() => {
+      const elements = document.querySelectorAll<HTMLElement>(
+        '.animate-on-scroll, .animate-slide-left, .animate-scale'
+      );
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated');
+              observer?.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -60px 0px',
+        }
+      );
+
+      elements.forEach((el) => {
+        observer?.observe(el);
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      observer?.disconnect();
+    };
+  }, [location.pathname, location.key]);
 }
