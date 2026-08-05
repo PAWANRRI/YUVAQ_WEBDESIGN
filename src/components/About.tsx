@@ -42,7 +42,7 @@ export default function About() {
           <p className="animate-on-scroll delay-2 text-[#6B6B6B] text-base leading-relaxed mb-8">
             YuvaQ was founded on a single belief — great software is built by people who care.
             Our team of 12+ engineers, designers, and strategists have shipped products for
-            startups, scale-ups, and Fortune 15 companies alike.
+            startups, scale-ups, and Fortune 5+ companies alike.
           </p>
 
           <p className="animate-on-scroll delay-3 text-[#6B6B6B] text-base leading-relaxed mb-12">

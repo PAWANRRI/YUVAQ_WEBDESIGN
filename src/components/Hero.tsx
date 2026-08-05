@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ArrowRight, MoveRight } from 'lucide-react';
 import LaptopOrbit from './LaptopOrbit';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -85,14 +86,15 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row items-start gap-8 justify-between">
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#contact" className="btn-dark cursor-none">
+                <Link to="/contact" className="btn-dark cursor-none">
                   <span>Start a Project</span>
                   <ArrowRight size={16} className="relative z-10" />
-                </a>
-                <a href="#work" className="btn-ghost cursor-none">
+                </Link>
+
+                <Link to="/all-projects" className="btn-ghost cursor-none">
                   <span>View Our Work</span>
                   <MoveRight size={16} />
-                </a>
+                </Link>
               </div>
 
               <div className="flex items-center gap-12 pb-2">
@@ -222,7 +224,7 @@ export default function Hero() {
                 className="font-display text-3xl font-bold"
                 style={{ fontFamily: 'Syne, sans-serif' }}
               >
-                2+
+                3+
               </div>
               <div className="text-[10px] uppercase tracking-[0.22em] text-[#6B6B6B] mt-1">
                 Years Experience

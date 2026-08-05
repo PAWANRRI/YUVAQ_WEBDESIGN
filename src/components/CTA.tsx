@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function CTA() {
   return (
@@ -30,10 +31,10 @@ export default function CTA() {
         </p>
 
         <div className="animate-on-scroll delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#contact" className="btn-dark cursor-none">
+          <Link to="/contact" className="btn-dark cursor-none">
             <span>Start a Conversation</span>
             <ArrowRight size={16} className="relative z-10" />
-          </a>
+          </Link>
           <a href="#work" className="btn-ghost cursor-none">
             <span>See Our Work</span>
           </a>

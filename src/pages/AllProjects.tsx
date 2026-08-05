@@ -49,37 +49,38 @@ const allProjects = [
   },
   {
     num: '05',
-    title: 'TechFlow Dashboard',
-    category: 'Analytics',
-    desc: 'Real-time analytics dashboard for tracking business metrics with interactive visualizations and custom reporting.',
-    image: 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg',
-    tags: ['React', 'TypeScript', 'D3.js'],
-    accent: '#0060FF',
-    link: '#',
-    year: '2024',
+    title: 'Bhawani Moulders Pvt. Ltd.',
+    category: 'Manufacturing',
+    desc: 'Modern corporate website for a Raipur-based steel manufacturer, showcasing MS angles, channels, rounds, squares, flats, gate channels, billets, quality standards, and streamlined quote enquiries.',
+    image: 'https://i.postimg.cc/zf7WbMRP/Screenshot-2026-08-05-122836.png',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    accent: '#FF4F17',
+    link: 'https://bhawanimoulders.com/',
+    year: '2026',
   },
-  // {
-  //   num: '06',
-  //   title: 'HealthSync',
-  //   category: 'Healthcare',
-  //   desc: 'Patient management system adopted by 300+ clinics across multiple countries for streamlined healthcare delivery.',
-  //   image: 'https://images.pexels.com/photos/4386476/pexels-photo-4386476.jpeg',
-  //   tags: ['React Native', 'GraphQL', 'Firebase'],
-  //   accent: '#FF4F17',
-  //   link: '#',
-  //   year: '2023',
-  // },
-  // {
-  //   num: '07',
-  //   title: 'E-Commerce Pro',
-  //   category: 'E-Commerce',
-  //   desc: 'Global marketplace connecting 50K+ sellers with buyers in 80 countries featuring advanced search and recommendations.',
-  //   image: 'https://images.pexels.com/photos/5632380/pexels-photo-5632380.jpeg',
-  //   tags: ['Next.js', 'Stripe', 'AWS'],
-  //   accent: '#00E87A',
-  //   link: '#',
-  //   year: '2024',
-  // },
+  {
+    num: '06',
+    title: 'Sunil Group of Industries',
+    category: 'Manufacturing',
+    desc: 'Modern corporate website for a leading iron and steel manufacturer, presenting BIS-approved MS channels, beams, flats, rounds, squares, manufacturing capabilities, product quality, and business enquiries.',
+    image: 'https://i.postimg.cc/K8Zn5Byx/Screenshot-2026-08-05-124639.png',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    accent: '#0060FF',
+    link: 'https://sunilgroupofindustries.com/',
+    year: '2026',
+  },
+  {
+    num: '07',
+    title: 'Shubham Steels',
+    category: 'Manufacturing',
+    desc: 'Professional corporate website for an authorized steel distributor and supplier, showcasing structural steel, tubes, wire products, plates, trusted partner brands, regional presence, and streamlined business enquiries.',
+    image:
+      'https://i.postimg.cc/zv7fDL2H/Screenshot-2026-08-05-124823.png',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    accent: '#00E87A',
+    link: 'https://www.steelshubham.co.in/',
+    year: '2026',
+  },
   // {
   //   num: '08',
   //   title: 'Supply Chain Hub',
@@ -195,11 +196,10 @@ export default function AllProjects() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 text-xs font-medium tracking-wide transition-all duration-300 cursor-none border ${
-                  selectedCategory === cat
-                    ? 'border-[#0D0D0D] bg-[#0D0D0D] text-white'
-                    : 'border-[#D4D3CF] text-[#6B6B6B] hover:border-[#0D0D0D]'
-                }`}
+                className={`px-4 py-2 text-xs font-medium tracking-wide transition-all duration-300 cursor-none border ${selectedCategory === cat
+                  ? 'border-[#0D0D0D] bg-[#0D0D0D] text-white'
+                  : 'border-[#D4D3CF] text-[#6B6B6B] hover:border-[#0D0D0D]'
+                  }`}
               >
                 {cat}
               </button>
@@ -209,21 +209,19 @@ export default function AllProjects() {
           <div className="flex items-center gap-3 lg:ml-auto">
             <button
               onClick={() => setViewMode('grid')}
-              className={`w-10 h-10 flex items-center justify-center border transition-all duration-300 cursor-none ${
-                viewMode === 'grid'
-                  ? 'border-[#0D0D0D] bg-[#0D0D0D] text-white'
-                  : 'border-[#D4D3CF] text-[#6B6B6B] hover:border-[#0D0D0D]'
-              }`}
+              className={`w-10 h-10 flex items-center justify-center border transition-all duration-300 cursor-none ${viewMode === 'grid'
+                ? 'border-[#0D0D0D] bg-[#0D0D0D] text-white'
+                : 'border-[#D4D3CF] text-[#6B6B6B] hover:border-[#0D0D0D]'
+                }`}
             >
               <Grid3x3 size={16} />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`w-10 h-10 flex items-center justify-center border transition-all duration-300 cursor-none ${
-                viewMode === 'list'
-                  ? 'border-[#0D0D0D] bg-[#0D0D0D] text-white'
-                  : 'border-[#D4D3CF] text-[#6B6B6B] hover:border-[#0D0D0D]'
-              }`}
+              className={`w-10 h-10 flex items-center justify-center border transition-all duration-300 cursor-none ${viewMode === 'list'
+                ? 'border-[#0D0D0D] bg-[#0D0D0D] text-white'
+                : 'border-[#D4D3CF] text-[#6B6B6B] hover:border-[#0D0D0D]'
+                }`}
             >
               <List size={16} />
             </button>

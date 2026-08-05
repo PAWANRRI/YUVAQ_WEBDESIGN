@@ -2,7 +2,37 @@ import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const links = ['Services', 'Work', 'Process', 'About', 'Contact'];
+type NavLink = {
+  label: string;
+  path: string;
+};
+
+const links: NavLink[] = [
+  {
+    label: 'Services',
+    path: '/services',
+  },
+  {
+    label: 'Work',
+    path: '/all-projects',
+  },
+  {
+    label: 'Process',
+    path: '/process',
+  },
+  {
+    label: 'Products',
+    path: '/products',
+  },
+  {
+    label: 'About',
+    path: '/about',
+  },
+  {
+    label: 'Contact',
+    path: '/contact',
+  }
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -79,24 +109,7 @@ export default function Navbar() {
 
   useEffect(() => {
     closeMenu();
-
-    if (location.pathname === '/' && location.hash) {
-      const id = location.hash.replace('#', '');
-      const el = document.getElementById(id);
-
-      if (el) {
-        requestAnimationFrame(() => {
-          const navHeight = 80;
-          const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
-
-          window.scrollTo({
-            top,
-            behavior: 'smooth',
-          });
-        });
-      }
-    }
-  }, [location.pathname, location.hash]);
+  }, [location.pathname]);
 
   const handleHomeClick = () => {
     closeMenu();
@@ -112,36 +125,35 @@ export default function Navbar() {
     });
   };
 
-  const handleSectionClick = (section: string) => {
+  const handleNavigation = (path: string) => {
     closeMenu();
 
-    if (location.pathname !== '/') {
-      navigate(`/#${section}`);
+    if (location.pathname === path) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
       return;
     }
 
-    const el = document.getElementById(section);
+    navigate(path);
+  };
 
-    if (el) {
-      const navHeight = 80;
-      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
-
-      window.history.replaceState(null, '', `/#${section}`);
-      window.scrollTo({
-        top,
-        behavior: 'smooth',
-      });
+  const isActiveLink = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
     }
+
+    return location.pathname === path || location.pathname.startsWith(`${path}/`);
   };
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled || open
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || open
             ? 'bg-[#EDECE8]/95 backdrop-blur-sm border-b border-[#D4D3CF]'
             : ''
-        }`}
+          }`}
       >
         <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-16 flex items-center justify-between h-20">
           <button
@@ -152,24 +164,29 @@ export default function Navbar() {
           >
             <img
               src="/yuvaQ-01.png"
-              alt="Logo"
+              alt="Yuvaq Logo"
               className="absolute left-0 top-1/2 -translate-y-1/2 h-28 sm:h-32 w-auto max-w-none object-contain"
             />
           </button>
 
           <div className="hidden lg:flex items-center gap-10">
             {links.map((link) => {
-              const section = link.toLowerCase();
+              const active = isActiveLink(link.path);
 
               return (
                 <button
-                  key={link}
+                  key={link.path}
                   type="button"
-                  onClick={() => handleSectionClick(section)}
-                  className="text-sm font-medium tracking-wide text-[#6B6B6B] hover:text-[#0D0D0D] transition-colors duration-300 relative group cursor-none"
+                  onClick={() => handleNavigation(link.path)}
+                  className={`text-sm font-medium tracking-wide transition-colors duration-300 relative group cursor-none ${active ? 'text-[#0D0D0D]' : 'text-[#6B6B6B] hover:text-[#0D0D0D]'
+                    }`}
                 >
-                  {link}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#00E87A] group-hover:w-full transition-all duration-400" />
+                  {link.label}
+
+                  <span
+                    className={`absolute -bottom-1 left-0 h-px bg-[#00E87A] transition-all duration-400 ${active ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
+                  />
                 </button>
               );
             })}
@@ -178,7 +195,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <button
               type="button"
-              onClick={() => handleSectionClick('contact')}
+              onClick={() => handleNavigation('/contact')}
               className="btn-dark cursor-none"
             >
               <span>Start a Project</span>
@@ -213,24 +230,25 @@ export default function Navbar() {
           >
             <div className="flex flex-col gap-6">
               {links.map((link) => {
-                const section = link.toLowerCase();
+                const active = isActiveLink(link.path);
 
                 return (
                   <button
-                    key={link}
+                    key={link.path}
                     type="button"
-                    onClick={() => handleSectionClick(section)}
-                    className="text-left text-2xl font-bold tracking-tight cursor-none"
+                    onClick={() => handleNavigation(link.path)}
+                    className={`text-left text-2xl font-bold tracking-tight cursor-none ${active ? 'text-[#00E87A]' : 'text-[#0D0D0D]'
+                      }`}
                     style={{ fontFamily: 'Syne, sans-serif' }}
                   >
-                    {link}
+                    {link.label}
                   </button>
                 );
               })}
 
               <button
                 type="button"
-                onClick={() => handleSectionClick('contact')}
+                onClick={() => handleNavigation('/contact')}
                 className="btn-dark w-fit mt-4 cursor-none"
               >
                 <span>Start a Project</span>
