@@ -27,14 +27,14 @@ EXPOSE 81
 CMD ["nginx", "-g", "daemon off;"]
 
 
-# docker build  --no-cache -t 192.168.13.72:5000/yuvaq_portfolio_new_27032026 .      
+# docker build  --no-cache -t docker.yuvaq.com/yuvaq_portfolio_new_27032026 .      
 # docker run -d --name yuvaq_portfolio_new_27032026 -p 81:81 yuvaq_portfolio_new_27032026_image
 
-# docker tag yuvaq_portfolio_new_27032026_image 192.168.13.72:5000/yuvaq_portfolio_new_27032026
-# docker push 192.168.13.72:5000/yuvaq_portfolio_new_27032026
-# docker pull 192.168.13.72:5000/yuvaq_portfolio_new_27032026
-# docker run -d --name yuvaq_portfolio_new_27032026 -p 81:81 192.168.13.72:5000/yuvaq_portfolio_new_27032026
+# docker tag yuvaq_portfolio_new_27032026_image docker.yuvaq.com/yuvaq_portfolio_new_27032026
+# docker push docker.yuvaq.com/yuvaq_portfolio_new_27032026
+# docker pull docker.yuvaq.com/yuvaq_portfolio_new_27032026
+# docker run -d --name yuvaq_portfolio_new_27032026 -p 81:81 docker.yuvaq.com/yuvaq_portfolio_new_27032026
 
 
-# docker pull 192.168.13.72:5000/rrcomplaint_frontend
-# docker run -d --name rrcomplaint_frontend -p 8003:80 192.168.13.72:5000/rrcomplaint_frontend
+# docker pull docker.yuvaq.com/rrcomplaint_frontend
+# docker run -d --name rrcomplaint_frontend -p 8003:80 docker.yuvaq.com/rrcomplaint_frontend

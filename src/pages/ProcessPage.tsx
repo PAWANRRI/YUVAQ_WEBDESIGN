@@ -129,10 +129,10 @@ function StepDetail({ step }: { step: typeof steps[0] }) {
 
         <p className="step-detail-desc">{step.description}</p>
 
-        <a href="#contact" className="step-detail-cta" style={{ color: step.color }}>
+        {/* <a href="#contact" className="step-detail-cta" style={{ color: step.color }}>
           <span>Start this phase</span>
           <ArrowUpRight size={16} strokeWidth={2} />
-        </a>
+        </a> */}
       </div>
 
       {/* Right side: deliverables */}
@@ -167,6 +167,14 @@ export default function ProcessPage() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+
+   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

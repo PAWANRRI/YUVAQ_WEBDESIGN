@@ -208,14 +208,16 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-col gap-3 mb-7">
-            <a href="#contact" className="btn-dark w-full justify-center">
-              <span>Start a Project</span>
-              <ArrowRight size={16} className="relative z-10" />
-            </a>
-            <a href="#work" className="btn-ghost w-full justify-center">
-              <span>View Our Work</span>
-              <MoveRight size={16} />
-            </a>
+          
+             <Link to="/contact" className="btn-dark w-full justify-center">
+                  <span>Start a Project</span>
+                  <ArrowRight size={16} className="relative z-10" />
+                </Link>
+           
+             <Link to="/all-projects" className="btn-ghost w-full justify-center">
+                  <span>View Our Work</span>
+                  <MoveRight size={16} />
+                </Link>
           </div>
 
           <div className="grid grid-cols-2 gap-4 border-t border-[#D4D3CF] pt-5">

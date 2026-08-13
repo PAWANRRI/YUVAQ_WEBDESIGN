@@ -119,6 +119,13 @@ export default function AboutPage() {
   const navigate = useNavigate();
 
   useRevealAnimation();
+   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  }, []);
 
   return (
     <main className="bg-[#EDECE8] text-[#0D0D0D] overflow-hidden">

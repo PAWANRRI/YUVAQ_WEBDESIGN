@@ -186,6 +186,14 @@ export default function ServicesPage() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
+   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {

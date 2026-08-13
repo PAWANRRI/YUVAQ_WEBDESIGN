@@ -198,6 +198,14 @@ export default function Products() {
   const [activeProduct, setActiveProduct] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
+   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {

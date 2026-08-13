@@ -132,7 +132,11 @@ export default function AllProjects() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
   }, []);
 
   const filteredProjects =

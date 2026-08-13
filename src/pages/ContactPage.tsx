@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState} from 'react';
 import type { FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import {
@@ -87,14 +87,16 @@ export default function ContactPage() {
   const [sending, setSending] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
-  useLayoutEffect(() => {
+
+  useRevealAnimation();
+
+   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'auto',
     });
   }, []);
-  useRevealAnimation();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
