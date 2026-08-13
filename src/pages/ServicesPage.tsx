@@ -102,7 +102,7 @@ function FeaturedCard({ service }: { service: Service }) {
 
         {/* CTA */}
         <div className="featured-cta" style={{ color: service.accent }}>
-          <span>Explore service</span>
+          {/* <span>Explore service</span>
           <ArrowUpRight
             size={18}
             strokeWidth={2}
@@ -110,7 +110,7 @@ function FeaturedCard({ service }: { service: Service }) {
               transform: isHovered ? 'translate(3px, -3px)' : 'translate(0, 0)',
               transition: 'transform 0.25s ease',
             }}
-          />
+          /> */}
         </div>
       </div>
 
@@ -143,7 +143,7 @@ function CompactCard({ service }: { service: Service }) {
         >
           {service.icon}
         </div>
-        <ArrowUpRight
+        {/* <ArrowUpRight
           size={18}
           strokeWidth={2}
           className="compact-arrow"
@@ -153,7 +153,7 @@ function CompactCard({ service }: { service: Service }) {
             transform: isHovered ? 'translate(2px, -2px)' : 'translate(0, 0)',
             transition: 'all 0.25s ease',
           }}
-        />
+        /> */}
       </div>
 
       <h3 className="compact-title" style={{ fontFamily: 'Syne, sans-serif' }}>
@@ -247,7 +247,7 @@ export default function ServicesPage() {
 
           <Link to="/contact" className="services-cta-btn">
             <span>Get a quote</span>
-            <ArrowUpRight size={16} />
+            {/* <ArrowUpRight size={16} /> */}
           </Link>
         </div>
 

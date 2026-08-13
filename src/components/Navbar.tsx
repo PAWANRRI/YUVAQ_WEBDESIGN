@@ -31,6 +31,10 @@ const links: NavLink[] = [
   {
     label: 'Contact',
     path: '/contact',
+  },
+  {
+    label: 'Career',
+    path: '/careers',
   }
 ];
 

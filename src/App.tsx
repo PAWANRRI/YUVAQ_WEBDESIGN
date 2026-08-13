@@ -18,6 +18,7 @@ import ProcessPage from './pages/ProcessPage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
 import Products from './pages/Products.tsx';
+import CareerPage from './pages/CareerPage.tsx';
 
 function Layout() {
   useScrollAnimation();
@@ -74,6 +75,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/careers" element={<CareerPage />} />
       </Route>
     </Routes>
   );

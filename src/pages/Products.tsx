@@ -263,7 +263,7 @@ export default function Products() {
         </div>
 
         {/* Bottom impact statement */}
-        <div className="products-impact">
+        {/* <div className="products-impact">
           <div className="products-impact-content">
             <Zap size={24} className="products-impact-icon" />
             <div>
@@ -272,7 +272,7 @@ export default function Products() {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
